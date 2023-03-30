@@ -84,7 +84,17 @@ class Rating(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='ratings')
     rate = models.PositiveSmallIntegerField(choices=RATES)
     # rate = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    def __str__(self) -> str:
+        return str(self.rate)
     
+    class Meta:
+        verbose_name = 'Рейтинг'
+        verbose_name_plural = 'Рейтинги'
+        unique_together = ['user', 'article']
+
+
+
 """
 1. Написать модель (models.py)
 2. Добавить в админку (admin.py)
